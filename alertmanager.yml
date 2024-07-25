@@ -1,0 +1,18 @@
+global:
+  resolve_timeout: 5m
+
+
+route:
+#routes:
+#  match:
+#    severity: 'critical'
+  receiver: 'default'
+
+receivers:
+- name: 'default'
+  email_configs:
+  - to: 'kuroonmyouji@gmail.com'
+    from: 'kuroonmyouji@gmail.com'
+    smarthost: 'smtp.gmail.com:587'
+    auth_username: 'kuroonmyouji@gmail.com'
+    auth_password: 'apnl hegw fmqm oshk'

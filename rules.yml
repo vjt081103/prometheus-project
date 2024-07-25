@@ -1,0 +1,10 @@
+groups:
+  - name: 'Ram usage'
+    rules:
+    - record: ram_using
+      expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / (node_memory_MemTotal_bytes)
+    - alert: High
+      expr: ram_using > 0.1
+      for: 5s
+      labels:
+        severity: critical
