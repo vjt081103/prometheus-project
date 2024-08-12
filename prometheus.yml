@@ -1,5 +1,5 @@
 global:
-  scrape_interval: 15s
+  scrape_interval: 3s
 
 scrape_configs:
   - job_name: 'node_exporter'
@@ -26,4 +26,4 @@ alerting:
   alertmanagers:
     - static_configs:
         - targets: 
-            - '10.208.180.12:9093'
+            - '172.17.0.2:9093'

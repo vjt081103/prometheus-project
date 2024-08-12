@@ -22,9 +22,9 @@ groups:
   - name: 'CPU up'
     rules:
     - record: cpu_up
-      expr: sum by (instance) (increase(node_cpu_seconds_total[5m])) / sum by (instance) (increase(node_cpu_seconds_total[5m] offset 5m))
+      expr: sum by (instance) (increase(node_cpu_seconds_total{mode=~"idle"}[5m])) / sum by (instance) (increase(node_cpu_seconds_total{mode=~"idle"}[5m] offset 5m))
     - alert: High CPU
       expr: cpu_up > 2
-      for: 5s
+      for: 9s
       labels:
         severity: high
