@@ -19,12 +19,14 @@ groups:
     - record: hello2
       expr: label_replace(node_memory_MemTotal_bytes,"label2","$1","instance","(.*):(.*)")
 
-  - name: 'CPU up'
+  - name: CPU warning
     rules:
-    - record: cpu_up
-      expr: sum by (instance) (increase(node_cpu_seconds_total{mode=~"idle"}[5m])) / sum by (instance) (increase(node_cpu_seconds_total{mode=~"idle"}[5m] offset 5m))
-    - alert: High CPU
-      expr: cpu_up > 2
-      for: 9s
+    - record: past_cpu_usage
+      expr: avg_over_time((100 - avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m]))) [1h] offset 1d)
+    - record: current_cpu_usage
+      expr: 100 - avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m]))
+    - alert: CPU-Usage-Unusual
+      expr: current_cpu_usage > 1.1 * past_cpu_usage
+      for: 5m
       labels:
-        severity: high
+        severity: warning
