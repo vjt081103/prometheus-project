@@ -1,8 +1,8 @@
 #!/bin/bash
 
 targets="/app/iventory.yml"
-config="/app/prometheus.yml"
-output="/app/hello.yml"
+config="/app/config.yml"
+output="/app/prometheus.yml"
 insertlines=7
 
 > "$output"
