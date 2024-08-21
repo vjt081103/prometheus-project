@@ -4,7 +4,7 @@ groups:
     - record: ram_using
       expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / (node_memory_MemTotal_bytes)
     - alert: High RAM
-      expr: ram_using > 0.1
+      expr: ram_using > 0.8
       for: 5s
       labels:
         severity: critical
