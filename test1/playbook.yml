@@ -1,0 +1,22 @@
+---
+- name: Update
+  hosts: test
+  become: true
+  tasks:
+    - name: Thay doi mirror1
+      shell: sed -i 's|mirrorlist=http://mirrorlist.centos.org|#mirrorlist=http://mirrorlist.centos.org|' /etc/yum.repos.d/*.repo
+    
+    - name: Thay doi mirror2
+      shell: sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/*.repo
+
+    - name: Thay doi mirror3
+      shell: sed -i 's|baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/*.repo
+
+    - name: Cap nhat
+      yum:
+        name: '*'
+        state: latest
+    
+  roles:
+  - role: prometheus.prometheus.node_exporter
+    

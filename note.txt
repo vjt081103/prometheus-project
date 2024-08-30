@@ -1,0 +1,1 @@
+curl -s "172.30.48.1:55555/api/v1/query?query=up" | jq -r '.data.result[0].value[1]'

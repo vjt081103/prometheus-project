@@ -1,9 +1,0 @@
-FROM ubuntu
-
-COPY run.sh /app/run.sh
-COPY iventory.yml /app/iventory.yml
-COPY config.yml /app/config.yml
-
-RUN chmod +x /app/run.sh
-
-ENTRYPOINT ["/app/run.sh"]

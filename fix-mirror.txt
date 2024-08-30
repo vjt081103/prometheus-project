@@ -1,3 +1,3 @@
-sudo sed -i 's|mirrorlist=http://mirrorlist.centos.org|#mirrorlist=http://mirrorlist.centos.org|' *.repo
-sudo sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' *.repo
-sudo sed -i 's|baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' *.repo
+sudo sed -i 's|mirrorlist=http://mirrorlist.centos.org|#mirrorlist=http://mirrorlist.centos.org|' /etc/yum.repos.d/*.repo
+sudo sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/*.repo
+sudo sed -i 's|baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/*.repo

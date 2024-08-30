@@ -3,13 +3,13 @@
 targets="/app/iventory.yml"
 config="/app/config.yml"
 output="/app/prometheus.yml"
-insertlines=7
+insertlines=11
 
 > "$output"
 
 head -n "$insertlines" "$config" >> "$output"
 
-while read -r line; do
+while IFS= read -r line || [ -n "$line" ]; do
   clean_line=$(echo "$line" | tr -d '\r' | tr -d '\020')
   if [[ $clean_line =~ ^\[(.*)\]$ ]]; then
     echo "hello"

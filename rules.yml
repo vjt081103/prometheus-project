@@ -1,30 +1,10 @@
 groups:
-  - name: 'Ram usage'
-    rules:
-    - record: ram_using
-      expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / (node_memory_MemTotal_bytes)
-    - alert: High RAM
-      expr: ram_using > 0.8
-      for: 5s
-      labels:
-        severity: critical
-
-  - name: 'Hellotest'
-    rules:      
-    - record: hello
-      expr: label_join(node_memory_MemTotal_bytes,"label1","-","instance","job")
-
-  - name: 'Hellotest2'
-    rules:
-    - record: hello2
-      expr: label_replace(node_memory_MemTotal_bytes,"label2","$1","instance","(.*):(.*)")
-
   - name: 'CPU up'
     rules:
-    - record: cpu_up
-      expr: sum by (instance) (increase(node_cpu_seconds_total{mode=~"idle"}[5m])) / sum by (instance) (increase(node_cpu_seconds_total{mode=~"idle"}[5m] offset 5m))
+    - record: cpu_usage_percent
+      expr: abs(node_cpu_seconds_total - 1.1 * holt_winters(node_cpu_seconds_total[5m],0.2,0.3))
     - alert: High CPU
-      expr: cpu_up > 2
+      expr: cpu_usage_percent > 0
       for: 9s
       labels:
         severity: high
